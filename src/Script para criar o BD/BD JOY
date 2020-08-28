@@ -1,0 +1,41 @@
+create database joy;
+
+use joy;
+
+create table clientes(
+Id_Cliente int not null unique auto_increment,
+Nome varchar(55) not null,
+CPF varchar(12) not null primary key,
+Sexo varchar(12) not null,
+Estado_Civil varchar(35) not null,
+Email varchar(100) not null,
+Telefone varchar(25) not null,
+Rua varchar(80) not null,
+Bairro varchar(50) not null,
+CEP varchar(9) not null,
+Cidade varchar (35) not null);
+
+create table produtos (
+Id_Produto int not null primary key auto_increment,
+Produto varchar(100) not null,
+Categoria varchar(50) not null,
+Valor double not null,
+Estoque int not null
+);
+
+create table vendas(
+id_venda int not null primary key auto_increment,
+data_venda varchar(10),
+valor_venda double,
+id_cliente varchar(12),
+foreign key (id_cliente) references clientes (CPF)
+);
+
+create table itens_venda_produto(
+id_venda int not null,
+id_produto int not null,
+quantidade_produto int not null,
+foreign key (id_venda) references vendas (id_venda),
+foreign key (id_produto) references produtos (id_produto)
+);
+
